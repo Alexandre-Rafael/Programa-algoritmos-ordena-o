@@ -28,7 +28,7 @@ int menuInsertionSort() {
     int size;
     char option;
 
-    printf("Digite o tamanho do array: ");
+    printf("Digite o tamanho da array: ");
     scanf("%d", &size);
 
     int arr[size];
