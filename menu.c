@@ -1,28 +1,6 @@
 #include "insertionSort.c"
 #include <time.h>
 
-void saveArrayToFile(int arr[], int size, const char *filename) {
-    FILE *file = fopen(filename, "w");
-    if (file != NULL) {
-        fprintf(file, "%d\n", size);
-        for (int i = 0; i < size; i++) {
-            fprintf(file, "%d\n", arr[i]);
-        }
-        fclose(file);
-    } else {
-        printf("Não foi possível criar o arquivo: %s\n", filename);
-    }
-}
-
-void saveTimeToFile(double time_taken, const char *filename) {
-    FILE *file = fopen(filename, "w");
-    if (file != NULL) {
-        fprintf(file, "%f\n", time_taken);
-        fclose(file);
-    } else {
-        printf("Não foi possível criar o arquivo: %s\n", filename);
-    }
-}
 
 int menuInsertionSort() {
     int size;
@@ -64,11 +42,11 @@ int menuInsertionSort() {
         case 's':
             return 0;
         default:
-            printf("Opção inválida\n");
+            printf("Opcao invalida\n");
             return 1;
     }
 
-    printf("Array original:\n");
+    printf("Original:\n");
     printArray(arr, size);
 
     int arr_copy[size];
@@ -82,12 +60,12 @@ int menuInsertionSort() {
     t = clock() - t;
     double time_taken = ((double)t) / CLOCKS_PER_SEC;
 
-    printf("Array ordenado:\n");
+    printf("Ordenado:\n");
     printArray(arr, size);
 
-    saveArrayToFile(arr_copy, size, "instancias_entrada.txt");
-    saveArrayToFile(arr, size, "instancias_ordenadas.txt");
-    saveTimeToFile(time_taken, "tempo_gasto.txt");
+    saveArrayToFile(arr_copy, size, "entradas.txt");
+    saveArrayToFile(arr, size, "ordenadas.txt");
+    saveTimeToFile(time_taken, "tempo.txt");
 
     return 0;
 }

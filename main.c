@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "menuInsertionSort.c"
-#include <time.h>
+#include "menu.c"
 
 int exibirMenu() { // Função para exibir o menu
 
@@ -11,8 +10,8 @@ int exibirMenu() { // Função para exibir o menu
     printf("|                          Algoritmos de Ordenacao                        |\n");
     printf("|-------------------------------------------------------------------------|\n");
     printf("|  Digite 1 para o Insertion Sort                                         |\n");
-    printf("|  Digite 2 para o Bubble Sort                                            |\n");
-    printf("|  Digite 3 para o Quick Sort                                             |\n");
+    printf("|  NADA POR AQUI                                                          |\n");
+    printf("|  NADA POR AQUI                                                          |\n");
     printf("|  Digite 4 para Sair                                                     |\n");
     printf("|-------------------------------------------------------------------------|\n");
     
@@ -26,11 +25,11 @@ int exibirMenu() { // Função para exibir o menu
             break;
 
         case 2:
-            printf("Array ordenado usando Bubble Sort.\n");
+            printf("Nada por aqui\n");
             break;
 
         case 3:
-            printf("Array ordenado usando Quick Sort.\n");
+            printf("Nada por aqui\n");
             break;
 
         case 4:
@@ -58,5 +57,32 @@ int main() {
 
     return 0;
 }
+
+void saveArrayToFile(int arr[], int size, const char *filename) {
+    FILE *file = fopen(filename, "w");
+    if (file != NULL) {
+        fprintf(file, "%d\n", size);
+        for (int i = 0; i < size; i++) {
+            fprintf(file, "%d\n", arr[i]);
+        }
+        fclose(file);
+    } else {
+        printf("Não foi possível criar o arquivo: %s\n", filename);
+    }
+}
+
+
+
+void saveTimeToFile(double time_taken, const char *filename) {
+    FILE *file = fopen(filename, "w");
+    if (file != NULL) {
+        fprintf(file, "%f\n", time_taken);
+        fclose(file);
+    } else {
+        printf("Não foi possível criar o arquivo: %s\n", filename);
+    }
+}
+
+
 
 
