@@ -22,26 +22,30 @@ int menuInsertionSort() {
     scanf(" %c", &option);
 
     const char *prefix;
+    const char *folder; 
 
     switch (option) {
         case 'r':
             srand(time(NULL));
             for (int i = 0; i < size; i++) {
-                arr[i] = rand() % 1000000; // Números randômicos de 0 a 1.000.000
+                arr[i] = rand() % 1000000; 
             }
             prefix = "random";
+            folder = "Random"; 
             break;
         case 'c':
             for (int i = 0; i < size; i++) {
                 arr[i] = i;
             }
             prefix = "crescente";
+            folder = "Crescente"; 
             break;
         case 'd':
             for (int i = 0; i < size; i++) {
                 arr[i] = size - i;
             }
             prefix = "decrescente";
+            folder = "Decrescente"; 
             break;
         case 's':
             return 0;
@@ -67,9 +71,10 @@ int menuInsertionSort() {
     printf("Ordenado:\n");
     printArray(arr, size);
 
-    saveArrayToFile(arr_copy, size, prefix);
-    saveSortedArrayToFile(arr, size, prefix);
-    saveTimeToFile(time_taken, prefix, size);
+
+    saveArrayToFile(arr_copy, size, prefix, folder);
+    saveSortedArrayToFile(arr, size, prefix, folder);
+    saveTimeToFile(time_taken, prefix, size, folder);
 
     return 0;
 }

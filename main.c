@@ -2,6 +2,26 @@
 #include <stdlib.h>
 #include "menu.c"
 #include <time.h>
+#include <sys/stat.h>
+
+
+void createDirectories() {
+    _mkdir("Arquivos de Entrada", 0777);
+    _mkdir("Arquivos de Saida", 0777);  
+    _mkdir("Arquivos de Tempo", 0777);  
+
+    _mkdir("Arquivos de Entrada/Crescente", 0777);    // Pasta para entrada crescente
+    _mkdir("Arquivos de Entrada/Decrescente", 0777);  // Pasta para entrada decrescente
+    _mkdir("Arquivos de Entrada/Random", 0777);      // Pasta para entrada random
+
+    _mkdir("Arquivos de Saida/Crescente", 0777);      // Pasta para saída crescente
+    _mkdir("Arquivos de Saida/Decrescente", 0777);    // Pasta para saída decrescente
+    _mkdir("Arquivos de Saida/Random", 0777);       
+
+    _mkdir("Arquivos de Tempo/Crescente", 0777);      
+    _mkdir("Arquivos de Tempo/Decrescente", 0777);    
+    _mkdir("Arquivos de Tempo/Random", 0777);        
+}
 
 int exibirMenu() { // Função para exibir o menu
 
@@ -48,6 +68,8 @@ int main() {
 
     int opcao;
 
+    createDirectories();
+
     do {
 
         opcao = exibirMenu();
@@ -59,9 +81,9 @@ int main() {
     return 0;
 }
 
-void saveArrayToFile(int arr[], int size, const char *prefix) {
-    char filename[50];
-    snprintf(filename, sizeof(filename), "entrada_%s_%d.txt", prefix, size);
+void saveArrayToFile(int arr[], int size, const char *prefix, const char *folder) {
+    char filename[100];
+    snprintf(filename, sizeof(filename), "Arquivos de Entrada\\%s\\entrada_%s_%d.txt", folder, prefix, size);
     FILE *file = fopen(filename, "w");
     if (file != NULL) {
         fprintf(file, "%d\n", size);
@@ -74,9 +96,9 @@ void saveArrayToFile(int arr[], int size, const char *prefix) {
     }
 }
 
-void saveSortedArrayToFile(int arr[], int size, const char *prefix) {
-    char filename[50];
-    snprintf(filename, sizeof(filename), "saida_%s_%d.txt", prefix, size);
+void saveSortedArrayToFile(int arr[], int size, const char *prefix, const char *folder) {
+    char filename[100];
+    snprintf(filename, sizeof(filename), "Arquivos de Saida\\%s\\saida_%s_%d.txt", folder, prefix, size);
     FILE *file = fopen(filename, "w");
     if (file != NULL) {
         fprintf(file, "%d\n", size);
@@ -89,15 +111,15 @@ void saveSortedArrayToFile(int arr[], int size, const char *prefix) {
     }
 }
 
-
-void saveTimeToFile(double time_taken, const char *prefix, int size) {
-    char filename[50];
-    snprintf(filename, sizeof(filename), "tempo_%s_%d.txt", prefix, size);
+void saveTimeToFile(double time_taken, const char *prefix, int size, const char *folder) {
+    char filename[100];
+    snprintf(filename, sizeof(filename), "Arquivos de Tempo\\%s\\tempo_%s_%d.txt", folder, prefix, size);
     FILE *file = fopen(filename, "w");
     if (file != NULL) {
-        fprintf(file, "%.2lf segundos\n", size, time_taken);
+        fprintf(file, "%.8lf segundos\n", time_taken);
         fclose(file);
     } else {
         printf("Não foi possível criar o arquivo: %s\n", filename);
     }
 }
+
