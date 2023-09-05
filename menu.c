@@ -1,7 +1,6 @@
 #include "insertionSort.c"
 #include <time.h>
 
-
 int menuInsertionSort() {
     int size;
     char option;
@@ -22,22 +21,27 @@ int menuInsertionSort() {
 
     scanf(" %c", &option);
 
+    const char *prefix;
+
     switch (option) {
         case 'r':
             srand(time(NULL));
             for (int i = 0; i < size; i++) {
                 arr[i] = rand() % 1000000; // Números randômicos de 0 a 1.000.000
             }
+            prefix = "random";
             break;
         case 'c':
             for (int i = 0; i < size; i++) {
                 arr[i] = i;
             }
+            prefix = "crescente";
             break;
         case 'd':
             for (int i = 0; i < size; i++) {
                 arr[i] = size - i;
             }
+            prefix = "decrescente";
             break;
         case 's':
             return 0;
@@ -63,9 +67,9 @@ int menuInsertionSort() {
     printf("Ordenado:\n");
     printArray(arr, size);
 
-    saveArrayToFile(arr_copy, size, "entradas.txt");
-    saveArrayToFile(arr, size, "ordenadas.txt");
-    saveTimeToFile(time_taken, "tempo.txt");
+    saveArrayToFile(arr_copy, size, prefix);
+    saveSortedArrayToFile(arr, size, prefix);
+    saveTimeToFile(time_taken, prefix, size);
 
     return 0;
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "menu.c"
+#include <time.h>
 
 int exibirMenu() { // Função para exibir o menu
 
@@ -10,8 +11,8 @@ int exibirMenu() { // Função para exibir o menu
     printf("|                          Algoritmos de Ordenacao                        |\n");
     printf("|-------------------------------------------------------------------------|\n");
     printf("|  Digite 1 para o Insertion Sort                                         |\n");
-    printf("|  NADA POR AQUI                                                          |\n");
-    printf("|  NADA POR AQUI                                                          |\n");
+    printf("|  --------------                                                         |\n");
+    printf("|  --------------                                                         |\n");
     printf("|  Digite 4 para Sair                                                     |\n");
     printf("|-------------------------------------------------------------------------|\n");
     
@@ -25,11 +26,11 @@ int exibirMenu() { // Função para exibir o menu
             break;
 
         case 2:
-            printf("Nada por aqui\n");
+            printf("------------\n");
             break;
 
         case 3:
-            printf("Nada por aqui\n");
+            printf("------------\n");
             break;
 
         case 4:
@@ -58,7 +59,24 @@ int main() {
     return 0;
 }
 
-void saveArrayToFile(int arr[], int size, const char *filename) {
+void saveArrayToFile(int arr[], int size, const char *prefix) {
+    char filename[50];
+    snprintf(filename, sizeof(filename), "entrada_%s_%d.txt", prefix, size);
+    FILE *file = fopen(filename, "w");
+    if (file != NULL) {
+        fprintf(file, "%d\n", size);
+        for (int i = 0; i < size; i++) {
+            fprintf(file, "%d\n", arr[i]);
+        }
+        fclose(file);
+    } else {
+        printf("Não foi possível criar o arquivo: %s\n", filename);
+    }
+}
+
+void saveSortedArrayToFile(int arr[], int size, const char *prefix) {
+    char filename[50];
+    snprintf(filename, sizeof(filename), "saida_%s_%d.txt", prefix, size);
     FILE *file = fopen(filename, "w");
     if (file != NULL) {
         fprintf(file, "%d\n", size);
@@ -72,17 +90,14 @@ void saveArrayToFile(int arr[], int size, const char *filename) {
 }
 
 
-
-void saveTimeToFile(double time_taken, const char *filename) {
+void saveTimeToFile(double time_taken, const char *prefix, int size) {
+    char filename[50];
+    snprintf(filename, sizeof(filename), "tempo_%s_%d.txt", prefix, size);
     FILE *file = fopen(filename, "w");
     if (file != NULL) {
-        fprintf(file, "%f\n", time_taken);
+        fprintf(file, "%.2lf segundos\n", size, time_taken);
         fclose(file);
     } else {
         printf("Não foi possível criar o arquivo: %s\n", filename);
     }
 }
-
-
-
-
