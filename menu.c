@@ -1,6 +1,7 @@
 #include "insertionSort.c"
 #include <time.h>
 
+
 int menuInsertionSort() {
     int size;
     char option;
@@ -8,7 +9,14 @@ int menuInsertionSort() {
     printf("Digite o tamanho do array: ");
     scanf("%d", &size);
 
-    int arr[size];
+    const char *prefix;
+    const char *folder;
+    int *arr = NULL;
+
+    if (size <= 0) {
+        printf("Tamanho inválido do array.\n");
+        return 1;
+    }
 
     printf("================================ MENU ======================================\n");
     printf("|                          INSERTION SORT                                 |\n");
@@ -21,31 +29,49 @@ int menuInsertionSort() {
 
     scanf(" %c", &option);
 
-    const char *prefix;
-    const char *folder; 
-
     switch (option) {
         case 'r':
             srand(time(NULL));
+            arr = (int *)malloc(sizeof(int) * size);
+
+            if (arr == NULL) {
+                printf("Erro na alocação de memória.\n");
+                return 1;
+            }
+
             for (int i = 0; i < size; i++) {
-                arr[i] = rand() % 1000000; 
+                arr[i] = rand() % 1000000;
             }
             prefix = "random";
-            folder = "Random"; 
+            folder = "Random";
             break;
         case 'c':
+            arr = (int *)malloc(sizeof(int) * size);
+
+            if (arr == NULL) {
+                printf("Erro na alocação de memória.\n");
+                return 1;
+            }
+
             for (int i = 0; i < size; i++) {
                 arr[i] = i;
             }
             prefix = "crescente";
-            folder = "Crescente"; 
+            folder = "Crescente";
             break;
         case 'd':
+            arr = (int *)malloc(sizeof(int) * size);
+
+            if (arr == NULL) {
+                printf("Erro na alocação de memória.\n");
+                return 1;
+            }
+
             for (int i = 0; i < size; i++) {
                 arr[i] = size - i;
             }
             prefix = "decrescente";
-            folder = "Decrescente"; 
+            folder = "Decrescente";
             break;
         case 's':
             return 0;
@@ -54,27 +80,26 @@ int menuInsertionSort() {
             return 1;
     }
 
-    printf("Original:\n");
-    printArray(arr, size);
+    int *arr_copy = (int *)malloc(sizeof(int) * size);
 
-    int arr_copy[size];
-    for (int i = 0; i < size; i++) {
-        arr_copy[i] = arr[i];
+    if (arr_copy == NULL) {
+        printf("Erro na alocação de memória para arr_copy.\n");
+        free(arr);
+        return 1;
     }
 
-    clock_t t;
-    t = clock();
+    memcpy(arr_copy, arr, sizeof(int) * size);
+
+    clock_t t = clock();
     insertionSort(arr, size);
     t = clock() - t;
     double time_taken = ((double)t) / CLOCKS_PER_SEC;
-
-    printf("Ordenado:\n");
-    printArray(arr, size);
-
 
     saveArrayToFile(arr_copy, size, prefix, folder);
     saveSortedArrayToFile(arr, size, prefix, folder);
     saveTimeToFile(time_taken, prefix, size, folder);
 
+    free(arr);
+    free(arr_copy);
     return 0;
 }

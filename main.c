@@ -116,7 +116,7 @@ void saveTimeToFile(double time_taken, const char *prefix, int size, const char 
     snprintf(filename, sizeof(filename), "Arquivos de Tempo\\%s\\tempo_%s_%d.txt", folder, prefix, size);
     FILE *file = fopen(filename, "w");
     if (file != NULL) {
-        fprintf(file, "%.8lf segundos\n", time_taken);
+        fprintf(file, "%.5lf segundos\n", time_taken);
         fclose(file);
     } else {
         printf("Não foi possível criar o arquivo: %s\n", filename);
