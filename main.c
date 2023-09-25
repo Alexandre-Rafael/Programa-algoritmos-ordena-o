@@ -5,6 +5,8 @@
 #include <sys/stat.h>
 #include "menuInsertionSort.c"
 #include "menuBubbleSort.c"
+#include "menuSelectionSort.c"
+#include "menuShellSort.c"
 
 
 
@@ -90,10 +92,14 @@ int exibirMenu() { // Função para exibir o menu
 
         case 3:
             printf("Array ordenado usando Selection Sort.\n");
+            createDirectories ("SelectionSort");
+            menuSelectionSort();
             break;
 
         case 4:
             printf("Array ordenado usando Shell Sort.\n");
+            createDirectories("ShellSort");
+            menuShellSort();
             break;
 
         case 5:
