@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "menu.c"
+#include "menuInsertionSort.c"
 #include <time.h>
 #include <sys/stat.h>
 
@@ -31,9 +31,10 @@ int exibirMenu() { // Função para exibir o menu
     printf("|                          Algoritmos de Ordenacao                        |\n");
     printf("|-------------------------------------------------------------------------|\n");
     printf("|  Digite 1 para o Insertion Sort                                         |\n");
-    printf("|  --------------                                                         |\n");
-    printf("|  --------------                                                         |\n");
-    printf("|  Digite 4 para Sair                                                     |\n");
+    printf("|  Digite 2 para o Bubble Sort                                            |\n");
+    printf("|  Digite 3 para o Selection Sort                                         |\n");
+    printf("|  Digite 4 para o Shell Sort                                             |\n");
+    printf("|  Digite 5 para Sair                                                     |\n");
     printf("|-------------------------------------------------------------------------|\n");
     
     printf("Digite a opcao desejada: ");
@@ -46,14 +47,19 @@ int exibirMenu() { // Função para exibir o menu
             break;
 
         case 2:
-            printf("------------\n");
+            printf("Array ordenado usando Bubble Sort.\n");
             break;
 
         case 3:
-            printf("------------\n");
+            printf("Array ordenado usando Selection Sort.\n");
             break;
 
         case 4:
+            printf("Array ordenado usando Shell Sort.\n");
+            break;
+
+
+        case 5:
             exit(0);
 
         default:
