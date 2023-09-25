@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "menuInsertionSort.c"
+#include "menuBubbleSort.c"
+#include <string.h>
 #include <time.h>
 #include <sys/stat.h>
 
@@ -48,6 +50,7 @@ int exibirMenu() { // Função para exibir o menu
 
         case 2:
             printf("Array ordenado usando Bubble Sort.\n");
+            menuBubbleSort();
             break;
 
         case 3:
