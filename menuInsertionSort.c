@@ -1,6 +1,10 @@
-#include "insertionSort.c"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <time.h>
+#include "insertionSort.c" 
 
+void createDirectories(const char *algorithmName); // Declare a função createDirectories no início do arquivo
 
 int menuInsertionSort() {
     int size;
@@ -17,6 +21,12 @@ int menuInsertionSort() {
         printf("Tamanho inválido do array.\n");
         return 1;
     }
+
+    // Nome do algoritmo
+    const char *algorithmName = "insertionSort";
+
+    // Crie os diretórios necessários
+    createDirectories(algorithmName);
 
     printf("================================ MENU ======================================\n");
     printf("|                          INSERTION SORT                                 |\n");
@@ -91,13 +101,13 @@ int menuInsertionSort() {
     memcpy(arr_copy, arr, sizeof(int) * size);
 
     clock_t t = clock();
-    insertionSort(arr, size);
+    insertionSort(arr, size); // Suponho que você tenha uma função insertionSort definida em insertionSort.c
     t = clock() - t;
     double time_taken = ((double)t) / CLOCKS_PER_SEC;
 
-    saveArrayToFile(arr_copy, size, prefix, folder);
-    saveSortedArrayToFile(arr, size, prefix, folder);
-    saveTimeToFile(time_taken, prefix, size, folder);
+    saveArrayToFile(arr_copy, size, prefix, folder, algorithmName);
+    saveSortedArrayToFile(arr, size, prefix, folder, algorithmName);
+    saveTimeToFile(time_taken, prefix, size, folder, algorithmName);
 
     free(arr);
     free(arr_copy);

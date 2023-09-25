@@ -1,7 +1,10 @@
-#include "bubbleSort.c"
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "bubbleSort.c" 
 
+void createDirectories(const char *algorithmName); // Declare a função createDirectories no início do arquivo
 
 int menuBubbleSort() {
     int size;
@@ -19,8 +22,14 @@ int menuBubbleSort() {
         return 1;
     }
 
+    // Nome do algoritmo
+    const char *algorithmName = "bubbleSort";
+
+    // Crie os diretórios necessários
+    createDirectories(algorithmName);
+
     printf("================================ MENU ======================================\n");
-    printf("|                          INSERTION SORT                                 |\n");
+    printf("|                          BUBBLE SORT                                    |\n");
     printf("|-------------------------------------------------------------------------|\n");
     printf("|  'r' para numeros randomicos                                            |\n");
     printf("|  'c' para numeros crescentes                                            |\n");
@@ -81,7 +90,7 @@ int menuBubbleSort() {
             return 1;
     }
 
-      int *arr_copy = (int *)malloc(sizeof(int) * size);
+    int *arr_copy = (int *)malloc(sizeof(int) * size);
 
     if (arr_copy == NULL) {
         printf("Erro na alocação de memória para arr_copy.\n");
@@ -92,18 +101,15 @@ int menuBubbleSort() {
     memcpy(arr_copy, arr, sizeof(int) * size);
 
     clock_t t = clock();
-    insertionSort(arr, size);
+    bubbleSort(arr, size);
     t = clock() - t;
     double time_taken = ((double)t) / CLOCKS_PER_SEC;
 
-    saveArrayToFile(arr_copy, size, prefix, folder);
-    saveSortedArrayToFile(arr, size, prefix, folder);
-    saveTimeToFile(time_taken, prefix, size, folder);
+    saveArrayToFile(arr_copy, size, prefix, folder, algorithmName);
+    saveSortedArrayToFile(arr, size, prefix, folder, algorithmName);
+    saveTimeToFile(time_taken, prefix, size, folder, algorithmName);
 
     free(arr);
     free(arr_copy);
-
     return 0;
-
 }
-
