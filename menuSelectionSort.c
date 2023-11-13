@@ -101,7 +101,7 @@ int menuSelectionSort() {
     memcpy(arr_copy, arr, sizeof(int) * size);
 
     clock_t t = clock();
-    selectionSort(arr, size); // Suponho que você tenha uma função insertionSort definida em insertionSort.c
+    selectionSort(arr, size);
     t = clock() - t;
     double time_taken = ((double)t) / CLOCKS_PER_SEC;
 

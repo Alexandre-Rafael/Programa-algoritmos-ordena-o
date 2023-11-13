@@ -7,6 +7,11 @@
 #include "menuBubbleSort.c"
 #include "menuSelectionSort.c"
 #include "menuShellSort.c"
+#include "menuMergeSort.c"
+#include "menuQuickSortPadrao.c"
+#include "menuQuickSortMedia.c"
+#include "menuQuickSortMediana.c"
+#include "menuQuickSortRandom.c"
 
 
 
@@ -71,7 +76,12 @@ int exibirMenu() { // Função para exibir o menu
     printf("|  Digite 2 para o Bubble Sort                                            |\n");
     printf("|  Digite 3 para o Selection Sort                                         |\n");
     printf("|  Digite 4 para o Shell Sort                                             |\n");
-    printf("|  Digite 5 para Sair                                                     |\n");
+    printf("|  Digite 5 para o Merge Sort                                             |\n");
+    printf("|  Digite 6 para o Quick Sort Padrao                                      |\n");
+    printf("|  Digite 7 para o Quick Sort usando Media                                |\n");
+    printf("|  Digite 8 para o Quick Sort usando Mediana                              |\n");
+    printf("|  Digite 9 para o Quick Sort Random                                      |\n");
+    printf("|  Digite 10 para Sair                                                    |\n");
     printf("|-------------------------------------------------------------------------|\n");
     
     printf("Digite a opcao desejada: ");
@@ -103,6 +113,36 @@ int exibirMenu() { // Função para exibir o menu
             break;
 
         case 5:
+            printf("Array ordenado usando Merge Sort.\n");
+            createDirectories("MergeSort");
+            menuMergeSort();
+            break;
+        
+        case 6:
+            printf("Array ordenado usando Quick Sort Padrao.\n");
+            createDirectories("QuickSortPadrao");
+            menuQuickSortPadrao();
+            break;
+
+        case 7:
+            printf("Array ordenado usando Quick Sort usando media.\n");
+            createDirectories("QuickSortMedia");
+            menuQuickSortMedia();
+            break;
+        
+        case 8:
+            printf("Array ordenado usando Quick Sort usando mediana.\n");
+            createDirectories("QuickSortMediana");
+            menuQuickSortMediana();
+            break;
+
+        case 9:
+            printf("Array ordenado usando Quick Sort Random.\n");
+            createDirectories("QuickSortRandom");
+            menuQuickSortRandom();
+            break;
+
+        case 10:
             exit(0);
 
         default:
@@ -121,7 +161,7 @@ int main() {
 
         opcao = exibirMenu();
 
-    } while (opcao != 5);
+    } while (opcao != 10);
 
     scanf("%d", &opcao);
 
